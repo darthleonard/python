@@ -22,9 +22,9 @@ def get_current_mac(interface):
 
     if mac_address_search_result:
         return mac_address_search_result.group(0)
-    else:
-        print("[-] Could not read MAC address.")
-        return
+
+    print("[-] Could not read MAC address.")
+    return None
 
 def change_mac(new_mac):
     current_mac = get_current_mac(args.interface)
