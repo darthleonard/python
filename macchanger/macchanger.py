@@ -26,24 +26,28 @@ def get_current_mac(interface):
     print("[-] Could not read MAC address.")
     return None
 
-def change_mac(new_mac):
-    current_mac = get_current_mac(args.interface)
+def change_mac(new_mac, interface):
+    current_mac = get_current_mac(interface)
     print("   Attempting to change %s > %s" % (current_mac, new_mac))
     if current_mac == new_mac:
-        print("[-] Interface %s address already is %s" % (args.interface, new_mac))
+        print("[-] Interface %s address already is %s" % (interface, new_mac))
     else:
-        execute_change_mac_commands(args.interface, new_mac)
+        execute_change_mac_commands(interface, new_mac)
         print("Current MAC = %s" % current_mac)
 
 def random_mac():
     return ":".join(map(str, (hex(random.randrange(16,255)).lstrip('0x') for _ in range(6))))
 
-def start_loop():
-    threading.Timer(args.time_interval, start_loop).start()
-    change_mac(random_mac())
+def start_loop(args):
+    threading.Timer(args.time_interval, start_loop, [args]).start()
+    change_mac(random_mac(), args.interface)
 
-args = get_arguments()
-if args.time_interval == 0:
-    change_mac(random_mac())
-else:
-    start_loop()
+def main():
+    args = get_arguments()
+    if args.time_interval == 0:
+        change_mac(random_mac(), args.interface)
+    else:
+        start_loop(args)
+
+if __name__ == '__main__':
+    main()
