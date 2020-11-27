@@ -1,12 +1,9 @@
-import sys
-import os
-import binascii
 import subprocess
 import re
 import argparse
 import threading
 import random
-   
+
 def get_arguments():
     parser = argparse.ArgumentParser(description='periodic macchanger')
     parser.add_argument('-i', '--interface', help = 'interface to edit', default = 'wlp6s0', required = False)
