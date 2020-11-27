@@ -24,6 +24,7 @@ def get_current_mac(interface):
         return mac_address_search_result.group(0)
     else:
         print("[-] Could not read MAC address.")
+        return
 
 def change_mac(new_mac):
     current_mac = get_current_mac(args.interface)
@@ -43,7 +44,6 @@ def start_loop():
 
 args = get_arguments()
 if args.time_interval == 0:
-    new_mac = random_mac()
-    change_mac(new_mac)
+    change_mac(random_mac())
 else:
     start_loop()
