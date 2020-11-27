@@ -45,7 +45,7 @@ def start_loop():
     change_mac(random_mac())
 
 args = get_arguments()
-if(args.time_interval == 0):
+if args.time_interval == 0:
     new_mac = random_mac()
     change_mac(new_mac)
 else:
