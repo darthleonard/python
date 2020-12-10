@@ -1,5 +1,5 @@
 def f(x):
-    return -(x * x) - 2 * x + 3
+    return -pow(x, 2) - 2*x + 3
 
 def calculate(a, b, n):
     h = (float(b - a) / n)
